@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: indexservice
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 36.133.231.227:8848
+  datasource:
+    url: jdbc:mysql://36.133.231.227:3306/photo_service
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

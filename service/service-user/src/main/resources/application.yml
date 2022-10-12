@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 36.133.231.227:8848
+  application:
+    name: userservice
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://36.133.231.227:3306/age_user?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+  redis:
+    host: 43.143.208.20
+    port: 6379
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: -1
+        max-wait: -1s
+        max-idle: 50
+        min-idle: 10
+    database: 0
+    password: ''
