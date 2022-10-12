@@ -7,6 +7,7 @@ import com.age.user.service.BaseService;
 import com.age.user.service.InfoService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * @since 2022-10-11
  */
 @Service
+@Slf4j
 public class BaseServiceImpl extends ServiceImpl<UserBaseMapper, Base> implements BaseService {
 
     @Autowired
@@ -62,6 +64,7 @@ public class BaseServiceImpl extends ServiceImpl<UserBaseMapper, Base> implement
         if (!save1){
             return "注册失败";
         }
+        log.info("新用户注册成功 {} 账号:{},手机号:{},",base.getName(),base.getAccount(),base.getPhone());
         return null;
     }
 }
