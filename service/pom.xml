@@ -15,6 +15,7 @@
         <module>service-index</module>
         <module>service-user</module>
         <module>service-music</module>
+        <module>service-security</module>
     </modules>
 
     <properties>
