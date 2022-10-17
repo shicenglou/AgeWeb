@@ -87,7 +87,7 @@ public class LoginUserServiceImpl implements LoginUserService {
         }
         //进行密码加密
         BCryptPasswordEncoder encoderb = new BCryptPasswordEncoder(16);
-        String encode = encoderb.encode(user.getPassword());
+        String encode = encoderb.encode("{bcrypt}"+user.getPassword());
         user.setPassword(encode);
         boolean save = sysUserService.save(user);
         if (save){
