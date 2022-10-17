@@ -13,7 +13,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class LoginUser implements UserDetails {
 
-    private SysUser sysUser;
+    private MiniUser sysUser;
 
 
 

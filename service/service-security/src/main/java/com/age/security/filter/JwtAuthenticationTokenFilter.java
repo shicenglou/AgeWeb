@@ -1,7 +1,9 @@
 package com.age.security.filter;
 
 
+import com.age.security.entity.SysUser;
 import com.age.security.model.LoginUser;
+import com.age.security.model.MiniUser;
 import com.age.security.utils.JwtUtil;
 import com.age.servicebase.utils.RedisUtil;
 import io.jsonwebtoken.Claims;
@@ -18,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -48,7 +51,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throw new RuntimeException("token非法");
         }
         String redisKey = "login:" + userid;
-        LoginUser user = (LoginUser) redisUtil.get(redisKey);
+        HashMap<String,Object> result = (HashMap<String, Object>) redisUtil.get(redisKey);
+        MiniUser miniUser = new MiniUser();
+        miniUser.setId(((String) result.get("id")));
+        miniUser.setUserName((String) result.get("userName"));
+        miniUser.setPassword((String) result.get("password"));
+        miniUser.setPhone((String) result.get("phone"));
+        LoginUser user = new LoginUser(miniUser);
+
 
         //存入SecurityContextHolder
         //TODO 获取权限信息封装到Authentication中

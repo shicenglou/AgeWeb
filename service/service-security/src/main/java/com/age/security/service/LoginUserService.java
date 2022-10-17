@@ -7,4 +7,6 @@ public interface LoginUserService {
     Result login(SysUser user);
 
     Result logout();
+
+    Result register(SysUser user);
 }

@@ -59,4 +59,9 @@ public class LoginUserController {
         return Result.ok(matches);
     }
 
+    @PostMapping("/register")
+    public Result register(@RequestBody SysUser user){
+        return loginUserService.register(user);
+    }
+
 }

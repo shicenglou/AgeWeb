@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-
+@Slf4j
 public class JwtUtil {
 
     //有效期为
@@ -38,6 +39,8 @@ public class JwtUtil {
         //当前时间加上固定有效期为合法时间
         long expMillis = nowMillis + ttlMillis;
         Date expDate = new Date(expMillis);
+        log.info("token 签发时间：{}",now);
+        log.info("token 过期时间：{}",expDate);
         return Jwts.builder()
                 .setId(uuid)
                 .setSubject(subject)            // 主题  可以是JSON数据
@@ -56,6 +59,7 @@ public class JwtUtil {
 
     public static Claims parseJWT(String jwt) throws Exception {
         SecretKey secretKey = generalKey();
+        log.info("解析token中！");
         return Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(jwt)
