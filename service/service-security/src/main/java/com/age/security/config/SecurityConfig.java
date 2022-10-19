@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 对于登录接口 允许匿名访问
-                .antMatchers("/user/**").permitAll()
+                .antMatchers("/user/**","/index","/login/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated().and()
                 //关闭csrf
@@ -68,7 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/test/**",
                         "/advice/**",
                         "/testes/**",
-                        "/user/**"
+                        "/user/**",
+                        "login/**",
+                        "/index"
                 );
 
         //
