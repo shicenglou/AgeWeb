@@ -3,9 +3,13 @@ package com.age.security.config;
 import com.age.security.filter.JwtAuthenticationTokenFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -29,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
 
-        String idForEncode = "bcrypt";
+        String idForEncode = "ssm";
         Map encoders = new HashMap<>();
         encoders.put(idForEncode, new BCryptPasswordEncoder());
         encoders.put("noop", NoOpPasswordEncoder.getInstance());
@@ -43,6 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return passwordEncoder;
     }
 
+    //认证失败或成功处理类
+    @Bean
+    public AuthenticationEventPublisher authenticationEventPublisher (ApplicationEventPublisher applicationEventPublisher) {
+        return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
+    }
+
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
@@ -51,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //关闭csrf
         http
+                //来一发默认表单登录哈哈哈
+                .formLogin(Customizer.withDefaults())
                 //不通过Session获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

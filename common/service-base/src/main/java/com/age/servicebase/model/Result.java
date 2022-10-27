@@ -86,6 +86,15 @@ public class Result <T> implements Serializable {
 
         return r;
     }
+    public static Result<Object> ok(String msg,Object data) {
+        Result<Object> r = new Result<Object>();
+        r.setMessage(msg);
+        r.setSuccess(true);
+        r.setCode(CodeEnum.OK.getCode());
+        r.setResult(data);
+
+        return r;
+    }
 
     public static Result<Object> error(String msg) {
         return error(CodeEnum.INTERNAL_ERROR.getCode(), msg);

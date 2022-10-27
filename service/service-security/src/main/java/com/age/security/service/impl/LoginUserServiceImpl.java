@@ -37,7 +37,11 @@ public class LoginUserServiceImpl implements LoginUserService {
     public Result login(SysUser user) {
         log.info("已经进入login接口");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
+        log.info("用户名密码导入到了，UsernamePasswordAuthenticationToken");
+        //显然，该方法会进行校验
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
+        log.info("取完authenticate后");
+        log.info("authenticate:{}",authenticate);
         if (authenticate == null){
             return Result.error("用户名或密码错误");
         }
