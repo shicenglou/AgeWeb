@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -30,11 +32,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if (sysUser == null){
             throw new RuntimeException("用户名或密码错误");
         }
+        List<String> role = new ArrayList<>();
+        role.add("admin");
         MiniUser miniUser = new MiniUser();
         miniUser.setPhone(sysUser.getPhonenumber());
-        miniUser.setUserName(sysUser.getUserName());
+        miniUser.setUsername(sysUser.getUserName());
         miniUser.setPassword(sysUser.getPassword());
         miniUser.setId(String.valueOf(sysUser.getId()));
+        miniUser.setPermissionValueList(role);
         return new LoginUser(miniUser);
     }
 }

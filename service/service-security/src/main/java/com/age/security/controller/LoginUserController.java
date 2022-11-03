@@ -2,7 +2,7 @@ package com.age.security.controller;
 
 
 import com.age.security.entity.SysUser;
-import com.age.security.service.LoginUserService;
+//import com.age.security.service.LoginUserService;
 import com.age.servicebase.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class LoginUserController {
+//
+//    @Autowired
+//    private LoginUserService loginUserService;
 
-    @Autowired
-    private LoginUserService loginUserService;
-
-    @PostMapping("/login")
-    public Result login(@RequestBody SysUser user){
-
-        return loginUserService.login(user);
-    }
-
-    @GetMapping("/logout")
-    public Result logout(){
-        return loginUserService.logout();
-    }
+//    @PostMapping("/login")
+//    public Result login(@RequestBody SysUser user){
+//
+//        return loginUserService.login(user);
+//    }
+//
+//    @GetMapping("/logout")
+//    public Result logout(){
+//        return loginUserService.logout();
+//    }
 
     @GetMapping("/passwordEncode")
     public Result bcrypt(@RequestParam String password){
@@ -59,9 +59,9 @@ public class LoginUserController {
         return Result.ok(matches);
     }
 
-    @PostMapping("/register")
-    public Result register(@RequestBody SysUser user){
-        return loginUserService.register(user);
-    }
+//    @PostMapping("/register")
+//    public Result register(@RequestBody SysUser user){
+//        return loginUserService.register(user);
+//    }
 
 }

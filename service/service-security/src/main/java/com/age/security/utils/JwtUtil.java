@@ -17,7 +17,7 @@ import java.util.UUID;
 public class JwtUtil {
 
     //有效期为
-    public static final Long JWT_TTL = 60 * 60 *1000L;// 60 * 60 *1000  一个小时
+    public static final Long JWT_TTL = 24 * 60 * 60 *1000L;// 24 * 60 * 60 *1000  24个小时
     //设置秘钥明文
     public static final String JWT_KEY = "sangeng";
 
@@ -64,6 +64,13 @@ public class JwtUtil {
                 .setSigningKey(secretKey)
                 .parseClaimsJws(jwt)
                 .getBody();
+    }
+
+    //2 根据token字符串得到用户信息
+    public static String getUserInfoFromToken(String token) {
+        SecretKey secretKey = generalKey();
+        String userinfo = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return userinfo;
     }
 
     public static void main(String[] args) throws Exception {
