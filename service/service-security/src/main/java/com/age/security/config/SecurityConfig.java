@@ -123,6 +123,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new UnauthEntryPoint())//没有权限访问
                 .and().csrf().disable()
                 .authorizeRequests()
+//                .anyRequest().authenticated()
+//                .and().authorizeRequests()
+                .antMatchers("/code/**").permitAll()    //验证码
                 .anyRequest().authenticated()
                 .and().logout().logoutUrl("/admin/acl/index/logout")//退出路径
                 .addLogoutHandler(new LogoutHandlerPlus(redisUtil)).and()

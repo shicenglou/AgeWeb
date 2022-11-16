@@ -34,7 +34,7 @@ public class LoginAuthencationFilterPlus extends UsernamePasswordAuthenticationF
         this.authenticationManager = authenticationManager;
         this.redisTemplate = redisTemplate;
         this.setPostOnly(false);
-        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/acl/login","POST"));
+        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
 
     }
 
@@ -47,6 +47,7 @@ public class LoginAuthencationFilterPlus extends UsernamePasswordAuthenticationF
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            //可以再次验证图形验证码
             user.setUsername(username);
             user.setPassword(password);
             log.info("用户信息:{}",user);

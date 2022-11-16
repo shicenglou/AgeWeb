@@ -22,17 +22,15 @@ public class JwtFilter implements GlobalFilter {
         String authorization = headers.getFirst("authorization");
         String url = request.getPath().value();
         System.out.println("url = "+url);
-        if (url.startsWith("/index/") || url.startsWith("/user/sso/")){
+        if (url.startsWith("/login/") || url.startsWith("/code/")){
             return chain.filter(exchange);
         }
         if (StringUtils.isBlank(authorization)){
-            String longToken = headers.getFirst("long-token");
-            String currentToken = headers.getFirst("current-token");
-            if (StringUtils.isBlank(longToken) || StringUtils.isBlank(currentToken)){
+            String longToken = headers.getFirst("token");
+            if (StringUtils.isBlank(longToken)){
                 //返回未登录，请进行登录
                 return loginError(exchange);
             }
-
         }
         return chain.filter(exchange);
     }

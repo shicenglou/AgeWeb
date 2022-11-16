@@ -22,5 +22,9 @@ spring:
           uri: lb://indexservice
           predicates:
             - Path=/index/**
+        - id: securityservice
+          uri: lb://securityservice
+          predicates:
+            - Path=/login/**,/code/**
 server:
   port: 10010

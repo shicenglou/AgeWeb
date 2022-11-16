@@ -43,6 +43,8 @@ public class TokenAutoFilter extends BasicAuthenticationFilter {
         if(authRequest != null) {
             SecurityContextHolder.getContext().setAuthentication(authRequest);
             log.info("授权成功");
+        }else {
+            log.info("没有token");
         }
         chain.doFilter(request,response);
     }
